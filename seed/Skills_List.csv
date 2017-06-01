@@ -1,0 +1,36 @@
+skill_category,skill_subcategory,skill_description,icon_type,icon_path
+Data Science,Statistics,Unsupervised Learning techniques,Internal,machineLearning_iconDark.png
+Data Science,Statistics,Supervised Learning techniques,Internal,machineLearning_iconDark.png
+Data Science,Data Visualization,Tableau,External,fa-line-chart
+Data Science,Data Visualization,SAS,External,fa-line-chart
+Data Science,Data Visualization,R,External,fa-line-chart
+Data Science,Data Visualization,Excel,External,fa-line-chart
+Data Science,Programming,SAS,External,fa-desktop
+Data Science,Programming,R,External,fa-desktop
+Data Science,Programming,Python,External,fa-desktop
+Data Science,Programming,SQL,External,fa-desktop
+Music,Instrument,Guitar,External,fa-music
+Music,Instrument,Piano,External,fa-music
+Music,Instrument,Violin,External,fa-music
+Music,Instrument,Flute,External,fa-music
+Music,Instrument,Saxophone,External,fa-music
+Music,General,Sheet Music,External,fa-music
+Languages,Languages,English,External,fa-globe
+Languages,Languages,French,External,fa-globe
+Languages,Languages,Spanish,External,fa-globe
+Languages,Languages,Russian,External,fa-globe
+Languages,Languages,German,External,fa-globe
+Activities,Sports,Tennis,External,fa-futbol-o
+Activities,Sports,Running,External,fa-futbol-o
+Activities,Sports,Biking,External,fa-futbol-o
+Activities,Sports,Climbing,External,fa-futbol-o
+Activities,Sports,Basketball,External,fa-futbol-o
+Activities,Sports,Scuba Diving,External,fa-futbol-o
+Business,Communication,Verbal Communication,External,fa-comment
+Business,Communication,Written Communication,External,fa-comment
+Business,Negotiation,New Hire Negotiations,Internal,negotiation_skills.png
+Business,Negotiation,General business negiation,Internal,negotiation_skills.png
+Business,Management,Selling,Internal,relations-512.png
+Business,Management,Time Management,Internal,relations-512.png
+Business,Management,Managing Others,Internal,relations-512.png
+Business,Management,Project Management,Internal,relations-512.png

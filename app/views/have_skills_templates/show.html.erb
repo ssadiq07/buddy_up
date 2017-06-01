@@ -1,0 +1,56 @@
+<h1>
+  Have skill #<%= @have_skill.id %> details
+</h1>
+
+<a href="/have_skills/<%= @have_skill.id %>/edit">
+  Edit have skill
+</a>
+
+<hr>
+
+<dl>
+  <dt>
+    Skill category
+  </dt>
+  <dd>
+    <%= @have_skill.skill_category %>
+  </dd>
+
+  <dt>
+    Skill subcategory
+  </dt>
+  <dd>
+    <%= @have_skill.skill_subcategory %>
+  </dd>
+
+  <dt>
+    Skill description
+  </dt>
+  <dd>
+    <%= @have_skill.skill_description %>
+  </dd>
+
+  <dt>
+    Created at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@have_skill.created_at) %> ago
+  </dd>
+
+  <dt>
+    Updated at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@have_skill.updated_at) %> ago
+  </dd>
+</dl>
+
+<a href="/delete_have_skill/<%= @have_skill.id %>" class="btn btn-default">
+  Delete have skill
+</a>
+
+<hr>
+
+<a href="/have_skills">
+  Go back
+</a>

@@ -1,0 +1,118 @@
+<!-- Validation failure messages -->
+<% if @preference.errors.any? %>
+  <% @preference.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<h1>
+  Add a new preference
+</h1>
+
+<hr>
+
+<form action="/create_preference" method="post">
+  <!-- Label and input for user_id -->
+  <div class="form-group">
+    <label for="user_id" class="control-label">
+      User
+    </label>
+
+    <input type="text" id="user_id" name="user_id" class="form-control" value="<%= @preference.user_id %>">
+  </div>
+
+  <!-- Label and input for integer -->
+  <div class="form-group">
+    <label for="integer" class="control-label">
+      Integer
+    </label>
+
+    <input type="text" id="integer" name="integer" class="form-control" value="<%= @preference.integer %>">
+  </div>
+
+  <!-- Label and input for My_Formality -->
+  <div class="form-group">
+    <label for="My_Formality" class="control-label">
+      My formality
+    </label>
+
+    <input type="text" id="My_Formality" name="My_Formality" class="form-control" value="<%= @preference.My_Formality %>">
+  </div>
+
+  <!-- Label and input for My_Schedule -->
+  <div class="form-group">
+    <label for="My_Schedule" class="control-label">
+      My schedule
+    </label>
+
+    <input type="text" id="My_Schedule" name="My_Schedule" class="form-control" value="<%= @preference.My_Schedule %>">
+  </div>
+
+  <!-- Label and input for My_Experience -->
+  <div class="form-group">
+    <label for="My_Experience" class="control-label">
+      My experience
+    </label>
+
+    <input type="text" id="My_Experience" name="My_Experience" class="form-control" value="<%= @preference.My_Experience %>">
+  </div>
+
+  <!-- Label and input for Their_Formality -->
+  <div class="form-group">
+    <label for="Their_Formality" class="control-label">
+      Their formality
+    </label>
+
+    <input type="text" id="Their_Formality" name="Their_Formality" class="form-control" value="<%= @preference.Their_Formality %>">
+  </div>
+
+  <!-- Label and input for Their_Schedule -->
+  <div class="form-group">
+    <label for="Their_Schedule" class="control-label">
+      Their schedule
+    </label>
+
+    <input type="text" id="Their_Schedule" name="Their_Schedule" class="form-control" value="<%= @preference.Their_Schedule %>">
+  </div>
+
+  <!-- Label and input for Wt_Schedule -->
+  <div class="form-group">
+    <label for="Wt_Schedule" class="control-label">
+      Wt schedule
+    </label>
+
+    <input type="text" id="Wt_Schedule" name="Wt_Schedule" class="form-control" value="<%= @preference.Wt_Schedule %>">
+  </div>
+
+  <!-- Label and input for Wt_Formality -->
+  <div class="form-group">
+    <label for="Wt_Formality" class="control-label">
+      Wt formality
+    </label>
+
+    <input type="text" id="Wt_Formality" name="Wt_Formality" class="form-control" value="<%= @preference.Wt_Formality %>">
+  </div>
+
+  <!-- Label and input for Wt_Experience -->
+  <div class="form-group">
+    <label for="Wt_Experience" class="control-label">
+      Wt experience
+    </label>
+
+    <input type="text" id="Wt_Experience" name="Wt_Experience" class="form-control" value="<%= @preference.Wt_Experience %>">
+  </div>
+
+  <button class="btn btn-default">
+    Create preference
+  </button>
+</form>
+
+<hr>
+
+<a href="/preferences">
+  Go back
+</a>

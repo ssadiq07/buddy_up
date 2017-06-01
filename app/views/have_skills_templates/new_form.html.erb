@@ -1,0 +1,55 @@
+<!-- Validation failure messages -->
+<% if @have_skill.errors.any? %>
+  <% @have_skill.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<h1>
+  Add a new have skill
+</h1>
+
+<hr>
+
+<form action="/create_have_skill" method="post">
+  <!-- Label and input for skill_category -->
+  <div class="form-group">
+    <label for="skill_category" class="control-label">
+      Skill category
+    </label>
+
+    <input type="text" id="skill_category" name="skill_category" class="form-control" value="<%= @have_skill.skill_category %>">
+  </div>
+
+  <!-- Label and input for skill_subcategory -->
+  <div class="form-group">
+    <label for="skill_subcategory" class="control-label">
+      Skill subcategory
+    </label>
+
+    <input type="text" id="skill_subcategory" name="skill_subcategory" class="form-control" value="<%= @have_skill.skill_subcategory %>">
+  </div>
+
+  <!-- Label and input for skill_description -->
+  <div class="form-group">
+    <label for="skill_description" class="control-label">
+      Skill description
+    </label>
+
+    <input type="text" id="skill_description" name="skill_description" class="form-control" value="<%= @have_skill.skill_description %>">
+  </div>
+
+  <button class="btn btn-default">
+    Create have skill
+  </button>
+</form>
+
+<hr>
+
+<a href="/have_skills">
+  Go back
+</a>

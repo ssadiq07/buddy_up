@@ -1,0 +1,56 @@
+<h1>
+  Need skill #<%= @need_skill.id %> details
+</h1>
+
+<a href="/need_skills/<%= @need_skill.id %>/edit">
+  Edit need skill
+</a>
+
+<hr>
+
+<dl>
+  <dt>
+    Skill category
+  </dt>
+  <dd>
+    <%= @need_skill.skill_category %>
+  </dd>
+
+  <dt>
+    Skill subcategory
+  </dt>
+  <dd>
+    <%= @need_skill.skill_subcategory %>
+  </dd>
+
+  <dt>
+    Skill description
+  </dt>
+  <dd>
+    <%= @need_skill.skill_description %>
+  </dd>
+
+  <dt>
+    Created at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@need_skill.created_at) %> ago
+  </dd>
+
+  <dt>
+    Updated at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@need_skill.updated_at) %> ago
+  </dd>
+</dl>
+
+<a href="/delete_need_skill/<%= @need_skill.id %>" class="btn btn-default">
+  Delete need skill
+</a>
+
+<hr>
+
+<a href="/need_skills">
+  Go back
+</a>

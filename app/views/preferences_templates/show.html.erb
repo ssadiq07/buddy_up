@@ -1,0 +1,105 @@
+<h1>
+  Preference #<%= @preference.id %> details
+</h1>
+
+<a href="/preferences/<%= @preference.id %>/edit">
+  Edit preference
+</a>
+
+<hr>
+
+<dl>
+  <dt>
+    User
+  </dt>
+  <dd>
+    <%= @preference.user_id %>
+  </dd>
+
+  <dt>
+    Integer
+  </dt>
+  <dd>
+    <%= @preference.integer %>
+  </dd>
+
+  <dt>
+    My formality
+  </dt>
+  <dd>
+    <%= @preference.My_Formality %>
+  </dd>
+
+  <dt>
+    My schedule
+  </dt>
+  <dd>
+    <%= @preference.My_Schedule %>
+  </dd>
+
+  <dt>
+    My experience
+  </dt>
+  <dd>
+    <%= @preference.My_Experience %>
+  </dd>
+
+  <dt>
+    Their formality
+  </dt>
+  <dd>
+    <%= @preference.Their_Formality %>
+  </dd>
+
+  <dt>
+    Their schedule
+  </dt>
+  <dd>
+    <%= @preference.Their_Schedule %>
+  </dd>
+
+  <dt>
+    Wt schedule
+  </dt>
+  <dd>
+    <%= @preference.Wt_Schedule %>
+  </dd>
+
+  <dt>
+    Wt formality
+  </dt>
+  <dd>
+    <%= @preference.Wt_Formality %>
+  </dd>
+
+  <dt>
+    Wt experience
+  </dt>
+  <dd>
+    <%= @preference.Wt_Experience %>
+  </dd>
+
+  <dt>
+    Created at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@preference.created_at) %> ago
+  </dd>
+
+  <dt>
+    Updated at
+  </dt>
+  <dd>
+    <%= time_ago_in_words(@preference.updated_at) %> ago
+  </dd>
+</dl>
+
+<a href="/delete_preference/<%= @preference.id %>" class="btn btn-default">
+  Delete preference
+</a>
+
+<hr>
+
+<a href="/preferences">
+  Go back
+</a>

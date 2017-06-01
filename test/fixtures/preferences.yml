@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: MyString
+  integer: MyString
+  My_Formality: 1
+  My_Schedule: 1
+  My_Experience: 1
+  Their_Formality: 1
+  Their_Schedule: 1
+  Wt_Schedule: 1
+  Wt_Formality: 1
+  Wt_Experience: 1
+
+two:
+  user_id: MyString
+  integer: MyString
+  My_Formality: 1
+  My_Schedule: 1
+  My_Experience: 1
+  Their_Formality: 1
+  Their_Schedule: 1
+  Wt_Schedule: 1
+  Wt_Formality: 1
+  Wt_Experience: 1

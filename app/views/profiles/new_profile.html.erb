@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Bootstrap CSS -->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+  <!-- Latest compiled and minified JavaScript -->
+  <style>
+  textarea {
+  width: 300px;
+  height: 150px;
+}
+
+
+
+  </style>
+</head>
+<body>
+
+
+<%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6">
+
+<p>Complete your profile
+
+<p><h3>Step 1: Tell us about yourself</h3>
+
+
+<% if @my_profile.errors.any? %>
+  <div id="error_explanation">
+
+    <ul>
+    <% @my_profile.errors.full_messages.each do |msg| %>
+      <b><font color="red"><%= msg %></font></b>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<!-- Basic Profile Information -->
+<form action="/profile/update">
+
+<table>
+  <tr>
+    <td><%= label_tag :first_name %></td>
+    <td><%= text_field_tag :first_name, @my_profile.first_name %></td>
+  </tr>
+
+  <tr>
+    <td><%= label_tag :last_name %></td>
+    <td><%= text_field_tag :last_name, @my_profile.last_name %></td>
+  </tr>
+
+  <tr>
+    <td><%= label_tag :bio %></td>
+    <td><%=text_area_tag :bio ,  @my_profile.bio%></td>
+  </tr>
+
+  <tr>
+    <td><%= label_tag :linked_in %></td>
+    <td><%= text_field_tag :linked_in, @my_profile.linked_in %></td>
+  </tr>
+
+  <tr>
+    <td><%= label_tag :twitter %></td>
+    <td><%= text_field_tag :twitter, @my_profile.twitter %></td>
+  </tr>
+</table>
+<p>
+
+<br>
+<button>Update Profile</button>
+</form>
+
+<hr>
+<p><h3>Step 2: What kind of skills do you have (can teach)</h3>
+<!--Teach Skills -->
+<form action="/create_have_skill" >
+
+<!-- List current have skills  -->
+<br> Current Teaching Skills:
+<br>
+<% if @my_have_skills.present? then %>
+<% @my_have_skills.each do |teach|%>
+  <li>  <%= teach.skill_category %>
+     > <%= teach.skill_subcategory %>
+      > <%= teach.skill_description %>
+    <a href="/delete_have_skill/<%= teach.id %>">Delete Skill</a>
+  </li>
+<% end %>
+
+<% else %>
+    You do not have any current teaching skills.  Please add one.
+
+<% end %>
+
+<p>
+<table>
+  <tr>
+    <td><%= select_tag(:full_skill_name,
+    options_from_collection_for_select(Skill.all, :id, :full_skill_name),
+    :class => "form-control") %>
+    </td>
+    <td>
+        <button>Add</button>
+    </td>
+  </tr>
+</table>
+
+</form>
+
+
+<hr>
+<p><h3>Step 3: What kind of skills do you want (learn)</h3>
+<!--Teach Skills -->
+<form action="/create_need_skill" >
+
+  <!-- List current need skills  -->
+  <br> Current Learning Skills:
+  <br>
+  <% if @my_need_skills.present? then %>
+  <% @my_need_skills.each do |learn|%>
+    <li>  <%= learn.skill_category %>
+       > <%= learn.skill_subcategory %>
+        > <%= learn.skill_description %>
+        <a href="/delete_need_skill/<%= learn.id %>">Delete Skill</a>
+    </li>
+  <% end %>
+  <% else %>
+      You do not have any current learning skills.  Please add one.
+
+  <% end %>
+
+  <p>
+  <table>
+    <tr>
+      <td><%= select_tag(:full_skill_name,
+          options_from_collection_for_select(Skill.all, :id, :full_skill_name),
+          :class => "form-control") %>
+      </td>
+      <td>
+          <button>Add</button>
+      </td>
+    </tr>
+  </table>
+
+
+</form>
+
+<hr>
+<p><h3> Step 4: What kind of experience do you want?</h3>
+
+  <p> We ask three questions to match you with your buddy.  This allows us to optimize compatibility between you and your matched buddy.
+<br>
+<li><b><i>My Answer: </i></b>First answer the question for yourself.</li>
+<li><b><i>Their Answer: </i></b>Then let us know how you want your match to answer the question.</li>
+<li><b><i>Importance: </i></b> Then let us know how important this trait is to finding you an ideal buddy.</li>
+
+<p>
+<!--Preferences -->
+<form action="/update_preferences" >
+
+<table>
+
+<p><b>Q1: How often do you want to meet?</b>
+
+<tr>
+  <td>My Answer:</td>
+  <td>Not that often</td>
+  <td>
+    <% if @my_preferences != nil %>
+    <input type="range" name="My_Schedule" id="My_Schedule" value="<%= @my_preferences.My_Schedule%>" min="1" max="10" data-show-value="true">
+    <% else %>
+    <input type="range" name="My_Schedule" id="My_Schedule" value="5" min="1" max="10" data-show-value="true">
+    <% end %>
+  </td>
+      <td>All the time</td>
+</tr>
+
+
+<tr>
+  <td>Their Answer:</td>
+  <td>Not that often</td>
+  <td>
+    <% if @my_preferences != nil %>
+    <input type="range" name="Their_Schedule" id="Their_Schedule" value="<%= @my_preferences.Their_Schedule%>" min="1" max="10" data-show-value="true">
+    <% else %>
+    <input type="range" name="Their_Schedule" id="Their_Schedule" value="5" min="1" max="10" data-show-value="true">
+    <% end %>
+  </td>
+  <td>All the time</td>
+</tr>
+
+<tr>
+  <td>Importance:</td>
+  <td>Not very important</td>
+  <td>
+    <input type="range" name="Their_Schedule" id="Their_Schedule" value="5" min="1" max="10" data-show-value="true"></td>
+  <td>Very important</td>
+</tr>
+
+</table>
+
+<p><b>Q2: Do you like formal or unformal learning?</b>
+<table>
+<tr>
+  <td>My Answer:</td>
+  <td>Not structured or formal</td>
+  <td>
+    <input type="range" name="My_Formality" id="My_Formality" value="5" min="1" max="10" data-show-value="true"></td>
+  <td>Very structured and formal</td>
+</tr>
+
+
+<tr>
+  <td>Their Answer:</td>
+  <td>Not structured or formal</td>
+  <td>
+    <input type="range" name="Their_Formality" id="Their_Formality" value="5" min="1" max="10" data-show-value="true"></td>
+  <td>Very structured and formal</td>
+</tr>
+
+<tr>
+  <td>Importance:</td>
+  <td>Not very important</td>
+  <td>
+    <input type="range" name="Wt_Formality" id="Wt_Formality" value="5" min="1" max="10" data-show-value="true"></td>
+  <td>Very important</td>
+</tr>
+
+</table>
+
+
+
+<p><b>Q3: How experienced are you in your skills?</b>
+<table>
+<tr>
+  <td>My Answer:</td>
+  <td>Not experienced</td>
+  <td>
+    <input type="range" name="My_Experience" id="My_Experience" value="5" min="1" max="10" data-show-value="true"></td>
+  <td>Very experienced</td>
+</tr>
+
+
+<tr>
+  <td>Their Answer:</td>
+  <td>Not experienced</td>
+  <td>
+    <input type="range" name="Their_Experience" id="Their_Experience" value="5" min="1" max="10" data-show-value="true"></td>
+  <td>Very experienced<</td>
+</tr>
+
+<tr>
+  <td>Importance:</td>
+  <td>Not very important</td>
+  <td>
+    <input type="range" name="Wt_Experience" id="Wt_Experience" value="5" min="1" max="10" data-show-value="true">
+      <td>Very important</td>
+</tr>
+
+</table>
+
+<br>
+<button>Save Preferences</button>
+</form>
+
+
+</div>
+<div class="col-sm-offset-0 col-sm-3"></div>
+</div>
+</div>
+
+</body>
