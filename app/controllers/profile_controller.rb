@@ -11,6 +11,16 @@ class ProfileController < ActionController::Base
       render("profiles/new_profile.html.erb")
   end
 
+  def show_profile
+      @my_profile = current_user
+      @my_have_skills = current_user.have_skills
+      @my_need_skills = current_user.need_skills
+      @my_preferences = current_user.preference
+
+
+      render("profiles/show_profile.html.erb")
+  end
+
   def update_profile
     @my_profile = current_user
 
@@ -19,8 +29,6 @@ class ProfileController < ActionController::Base
     @my_profile.bio = params[:bio]
     @my_profile.linked_in = params[:linked_in]
     @my_profile.twitter = params[:twitter]
-
-
 
     save_status = @my_profile.save
 
@@ -116,6 +124,7 @@ class ProfileController < ActionController::Base
     @preference.My_Experience = params[:My_Experience]
     @preference.Their_Formality = params[:Their_Formality]
     @preference.Their_Schedule = params[:Their_Schedule]
+    @preference.Their_Experience = params[:Their_Experience]
     @preference.Wt_Schedule = params[:Wt_Schedule]
     @preference.Wt_Formality = params[:Wt_Formality]
     @preference.Wt_Experience = params[:Wt_Experience]
@@ -137,6 +146,7 @@ class ProfileController < ActionController::Base
     @preference.My_Experience = params[:My_Experience]
     @preference.Their_Formality = params[:Their_Formality]
     @preference.Their_Schedule = params[:Their_Schedule]
+    @preference.Their_Experience = params[:Their_Experience]
     @preference.Wt_Schedule = params[:Wt_Schedule]
     @preference.Wt_Formality = params[:Wt_Formality]
     @preference.Wt_Experience = params[:Wt_Experience]

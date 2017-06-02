@@ -1,0 +1,23 @@
+<h1>Show Matches</h1>
+
+<p>
+  <table>
+    <tr>
+      <td>Name</td>
+      <td>Bio</td>
+      <td> Learn </td>
+      <td> Teach </td>
+
+    </tr>
+  <% @potential_matches.each do |match|%>
+
+  <tr>
+    <td><%= match["first_name"] %></td>
+    <td><%= match["bio"] %></td>
+    <td><%= match["learn_skill_category"] %> > <%= match["learn_skill_subcategory"] %> > <%= match["learn_skill_description"]  %> </td>
+    <td><%= match["teach_skill_category"] %> > <%= match["teach_skill_subcategory"] %> > <%= match["teach_skill_description"]  %> </td>
+
+  </tr>
+  <% end %>
+
+</table>

@@ -25,7 +25,8 @@
 <body>
 
 
-<%= link_to "Sign Out", destroy_user_session_path, method: :delete %>
+<%= link_to "Sign Out", destroy_user_session_path %>
+<%= link_to "Show Matches", "/matches/show" %>
 
 
 <div class="container">
@@ -86,9 +87,21 @@
 
 <hr>
 <p><h3>Step 2: What kind of skills do you have (can teach)</h3>
+<!-- Current Skills Errors  -->
+<% if @my_have_skills.errors.any? %>
+  <div id="error_explanation">
+
+    <ul>
+    <% @my_have_skills.errors.full_messages.each do |msg| %>
+      <b><font color="red"><%= msg %></font></b>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+
+
 <!--Teach Skills -->
 <form action="/create_have_skill" >
-
 <!-- List current have skills  -->
 <br> Current Teaching Skills:
 <br>
@@ -207,7 +220,12 @@
   <td>Importance:</td>
   <td>Not very important</td>
   <td>
-    <input type="range" name="Their_Schedule" id="Their_Schedule" value="5" min="1" max="10" data-show-value="true"></td>
+    <% if @my_preferences != nil %>
+    <input type="range" name="Their_Schedule" id="Their_Schedule" value="<%= @my_preferences.Their_Schedule%>" min="1" max="10" data-show-value="true">
+    <% else %>
+    <input type="range" name="Their_Schedule" id="Their_Schedule" value="5" min="1" max="10" data-show-value="true">
+    <% end %>
+  </td>
   <td>Very important</td>
 </tr>
 
@@ -219,7 +237,13 @@
   <td>My Answer:</td>
   <td>Not structured or formal</td>
   <td>
-    <input type="range" name="My_Formality" id="My_Formality" value="5" min="1" max="10" data-show-value="true"></td>
+    <% if @my_preferences != nil %>
+    <input type="range" name="My_Formality" id="My_Formality" value="<%= @my_preferences.My_Formality%>" min="1" max="10" data-show-value="true">
+    <% else %>
+    <input type="range" name="My_Formality" id="My_Formality" value="5" min="1" max="10" data-show-value="true">
+    <% end %>
+
+  </td>
   <td>Very structured and formal</td>
 </tr>
 
@@ -228,7 +252,13 @@
   <td>Their Answer:</td>
   <td>Not structured or formal</td>
   <td>
-    <input type="range" name="Their_Formality" id="Their_Formality" value="5" min="1" max="10" data-show-value="true"></td>
+    <% if @my_preferences != nil %>
+    <input type="range" name="Their_Formality" id="Their_Formality" value="<%= @my_preferences.Their_Formality%>" min="1" max="10" data-show-value="true">
+    <% else %>
+    <input type="range" name="Their_Formality" id="Their_Formality" value="5" min="1" max="10" data-show-value="true">
+    <% end %>
+
+  </td>
   <td>Very structured and formal</td>
 </tr>
 
@@ -236,7 +266,13 @@
   <td>Importance:</td>
   <td>Not very important</td>
   <td>
-    <input type="range" name="Wt_Formality" id="Wt_Formality" value="5" min="1" max="10" data-show-value="true"></td>
+    <% if @my_preferences != nil %>
+    <input type="range" name="Wt_Formality" id="Wt_Formality" value="<%= @my_preferences.Wt_Formality%>" min="1" max="10" data-show-value="true">
+    <% else %>
+    <input type="range" name="Wt_Formality" id="Wt_Formality" value="5" min="1" max="10" data-show-value="true">
+    <% end %>
+
+    </td>
   <td>Very important</td>
 </tr>
 
@@ -250,7 +286,13 @@
   <td>My Answer:</td>
   <td>Not experienced</td>
   <td>
-    <input type="range" name="My_Experience" id="My_Experience" value="5" min="1" max="10" data-show-value="true"></td>
+    <% if @my_preferences != nil %>
+    <input type="range" name="My_Experience" id="My_Experience" value="<%= @my_preferences.My_Experience%>" min="1" max="10" data-show-value="true">
+    <% else %>
+    <input type="range" name="My_Experience" id="My_Experience" value="5" min="1" max="10" data-show-value="true">
+    <% end %>
+
+    </td>
   <td>Very experienced</td>
 </tr>
 
@@ -259,7 +301,13 @@
   <td>Their Answer:</td>
   <td>Not experienced</td>
   <td>
-    <input type="range" name="Their_Experience" id="Their_Experience" value="5" min="1" max="10" data-show-value="true"></td>
+    <% if @my_preferences != nil %>
+    <input type="range" name="Their_Experience" id="Their_Experience" value="<%= @my_preferences.Their_Experience%>" min="1" max="10" data-show-value="true">
+    <% else %>
+    <input type="range" name="Their_Experience" id="Their_Experience" value="5" min="1" max="10" data-show-value="true">
+    <% end %>
+
+    </td>
   <td>Very experienced<</td>
 </tr>
 
@@ -267,7 +315,12 @@
   <td>Importance:</td>
   <td>Not very important</td>
   <td>
+    <% if @my_preferences != nil %>
+    <input type="range" name="Wt_Experience" id="Wt_Experience" value="<%= @my_preferences.Wt_Experience%>" min="1" max="10" data-show-value="true">
+    <% else %>
     <input type="range" name="Wt_Experience" id="Wt_Experience" value="5" min="1" max="10" data-show-value="true">
+    <% end %>
+  </td>
       <td>Very important</td>
 </tr>
 

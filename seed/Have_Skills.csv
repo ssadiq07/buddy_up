@@ -1,0 +1,154 @@
+user_id,skill_id,skill_category,skill_subcategory,skill_description
+9,1,Data Science,Statistics,Unsupervised Learning techniques
+44,10,Data Science,Programming,SQL
+32,6,Data Science,Data Visualization,Excel
+20,25,Activities,Sports,Climbing
+19,1,Data Science,Statistics,Unsupervised Learning techniques
+28,10,Data Science,Programming,SQL
+33,5,Data Science,Data Visualization,R
+18,11,Music,Instrument,Guitar
+22,19,Languages,Languages,Spanish
+8,10,Data Science,Programming,SQL
+30,24,Activities,Sports,Biking
+30,26,Activities,Sports,Basketball
+19,12,Music,Instrument,Piano
+22,10,Data Science,Programming,SQL
+36,1,Data Science,Statistics,Unsupervised Learning techniques
+15,15,Music,Instrument,Saxophone
+9,16,Music,General,Sheet Music
+42,23,Activities,Sports,Running
+8,15,Music,Instrument,Saxophone
+39,21,Languages,Languages,German
+13,22,Activities,Sports,Tennis
+10,18,Languages,Languages,French
+39,7,Data Science,Programming,SAS
+35,1,Data Science,Statistics,Unsupervised Learning techniques
+37,13,Music,Instrument,Violin
+13,22,Activities,Sports,Tennis
+29,13,Music,Instrument,Violin
+24,25,Activities,Sports,Climbing
+38,10,Data Science,Programming,SQL
+1,13,Music,Instrument,Violin
+23,6,Data Science,Data Visualization,Excel
+49,17,Languages,Languages,English
+5,1,Data Science,Statistics,Unsupervised Learning techniques
+43,20,Languages,Languages,Russian
+6,14,Music,Instrument,Flute
+30,22,Activities,Sports,Tennis
+49,25,Activities,Sports,Climbing
+3,2,Data Science,Statistics,Supervised Learning techniques
+21,12,Music,Instrument,Piano
+50,6,Data Science,Data Visualization,Excel
+8,23,Activities,Sports,Running
+41,4,Data Science,Data Visualization,SAS
+47,9,Data Science,Programming,Python
+18,26,Activities,Sports,Basketball
+2,2,Data Science,Statistics,Supervised Learning techniques
+9,6,Data Science,Data Visualization,Excel
+7,1,Data Science,Statistics,Unsupervised Learning techniques
+13,16,Music,General,Sheet Music
+46,21,Languages,Languages,German
+9,6,Data Science,Data Visualization,Excel
+4,11,Music,Instrument,Guitar
+21,19,Languages,Languages,Spanish
+45,13,Music,Instrument,Violin
+1,4,Data Science,Data Visualization,SAS
+16,3,Data Science,Data Visualization,Tableau
+14,16,Music,General,Sheet Music
+47,16,Music,General,Sheet Music
+41,19,Languages,Languages,Spanish
+18,3,Data Science,Data Visualization,Tableau
+42,18,Languages,Languages,French
+42,5,Data Science,Data Visualization,R
+18,16,Music,General,Sheet Music
+34,21,Languages,Languages,German
+44,12,Music,Instrument,Piano
+42,8,Data Science,Programming,R
+50,13,Music,Instrument,Violin
+30,2,Data Science,Statistics,Supervised Learning techniques
+25,26,Activities,Sports,Basketball
+41,11,Music,Instrument,Guitar
+28,3,Data Science,Data Visualization,Tableau
+8,22,Activities,Sports,Tennis
+20,12,Music,Instrument,Piano
+1,16,Music,General,Sheet Music
+21,23,Activities,Sports,Running
+12,17,Languages,Languages,English
+23,5,Data Science,Data Visualization,R
+43,9,Data Science,Programming,Python
+44,5,Data Science,Data Visualization,R
+46,12,Music,Instrument,Piano
+24,3,Data Science,Data Visualization,Tableau
+47,4,Data Science,Data Visualization,SAS
+40,18,Languages,Languages,French
+32,3,Data Science,Data Visualization,Tableau
+7,4,Data Science,Data Visualization,SAS
+31,5,Data Science,Data Visualization,R
+13,17,Languages,Languages,English
+11,15,Music,Instrument,Saxophone
+35,17,Languages,Languages,English
+15,21,Languages,Languages,German
+43,6,Data Science,Data Visualization,Excel
+6,11,Music,Instrument,Guitar
+37,3,Data Science,Data Visualization,Tableau
+5,20,Languages,Languages,Russian
+49,21,Languages,Languages,German
+1,8,Data Science,Programming,R
+46,8,Data Science,Programming,R
+3,20,Languages,Languages,Russian
+28,20,Languages,Languages,Russian
+44,3,Data Science,Data Visualization,Tableau
+21,19,Languages,Languages,Spanish
+1,3,Data Science,Data Visualization,Tableau
+17,9,Data Science,Programming,Python
+25,21,Languages,Languages,German
+15,23,Activities,Sports,Running
+26,25,Activities,Sports,Climbing
+50,8,Data Science,Programming,R
+11,5,Data Science,Data Visualization,R
+23,19,Languages,Languages,Spanish
+36,26,Activities,Sports,Basketball
+39,14,Music,Instrument,Flute
+36,17,Languages,Languages,English
+40,6,Data Science,Data Visualization,Excel
+19,16,Music,General,Sheet Music
+16,13,Music,Instrument,Violin
+2,23,Activities,Sports,Running
+4,19,Languages,Languages,Spanish
+10,15,Music,Instrument,Saxophone
+33,9,Data Science,Programming,Python
+18,7,Data Science,Programming,SAS
+2,7,Data Science,Programming,SAS
+1,17,Languages,Languages,English
+37,13,Music,Instrument,Violin
+24,25,Activities,Sports,Climbing
+31,19,Languages,Languages,Spanish
+6,10,Data Science,Programming,SQL
+17,17,Languages,Languages,English
+11,7,Data Science,Programming,SAS
+28,20,Languages,Languages,Russian
+39,17,Languages,Languages,English
+7,21,Languages,Languages,German
+26,21,Languages,Languages,German
+36,11,Music,Instrument,Guitar
+10,7,Data Science,Programming,SAS
+44,14,Music,Instrument,Flute
+51,2,Data Science,Statistics,Supervised Learning techniques
+24,4,Data Science,Data Visualization,SAS
+26,7,Data Science,Programming,SAS
+11,12,Music,Instrument,Piano
+10,11,Music,Instrument,Guitar
+15,15,Music,Instrument,Saxophone
+28,21,Languages,Languages,German
+10,24,Activities,Sports,Biking
+49,12,Music,Instrument,Piano
+40,4,Data Science,Data Visualization,SAS
+6,1,Data Science,Statistics,Unsupervised Learning techniques
+28,23,Activities,Sports,Running
+31,23,Activities,Sports,Running
+40,14,Music,Instrument,Flute
+15,10,Data Science,Programming,SQL
+13,7,Data Science,Programming,SAS
+5,7,Data Science,Programming,SAS
+12,14,Music,Instrument,Flute
+50,17,Languages,Languages,English

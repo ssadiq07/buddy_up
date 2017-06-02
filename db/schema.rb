@@ -48,8 +48,6 @@ ActiveRecord::Schema.define(version: 20170530034928) do
   end
 
   create_table "skills", force: :cascade do |t|
-    t.integer  "need_skill_id"
-    t.integer  "have_skill_id"
     t.string   "skill_category"
     t.string   "skill_subcategory"
     t.string   "skill_description"
