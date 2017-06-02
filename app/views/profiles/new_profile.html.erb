@@ -88,7 +88,16 @@
 <hr>
 <p><h3>Step 2: What kind of skills do you have (can teach)</h3>
 <!-- Current Skills Errors  -->
+<% if @my_have_skills.errors.any? %>
+  <div id="error_explanation">
 
+    <ul>
+    <% @my_have_skills.errors.full_messages.each do |msg| %>
+      <b><font color="red"><%= msg %></font></b>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
 
 <!--Teach Skills -->
 <form action="/create_have_skill" >
