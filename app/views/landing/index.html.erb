@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <style>
+  textarea {
+  width: 300px;
+  height: 150px;
+}
+
+
+
+  </style>
+</head>
+<body>
+
+
+<nav class="navbar navbar-inverse bg-inverse" >
+  <a class="navbar-brand" href="#">Buddy Up</a>
+    <nav class="navbar navbar-inverse bg-inverse">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav>
+
+
+    <div class="collapse" id="navbarToggleExternalContent">
+          <!-- Sign in or out -->
+            <% if user_signed_in? %>
+              <a class="nav-item nav-link" href = "users/sign_out"> Sign Out</a>
+            <% else %>
+              <a class="nav-item nav-link" href = "users/sign_in"> Sign In</a>
+            <% end %>
+
+      </div>
+  </nav>
+
+
+<!-- Sign Up Form -->
+<a class="nav-item nav-link" href = "users/sign_up">Join Now</a>
+
+</body>
+</html>

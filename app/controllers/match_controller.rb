@@ -10,6 +10,12 @@ class MatchController < ActionController::Base
     #Find potential matches
     @potential_matches = grab_potential_matches_v2
 
+    #Score potential matches
+    @scored_matches = score_matches(@potential_matches)
+
+    #Sort output by descending match rate
+    @scored_matches = @scored_matches.sort_by { |hsh| -1*hsh["score"] }
+
 
     render("matches/show_matches.html.erb")
   end
@@ -42,7 +48,26 @@ class MatchController < ActionController::Base
 users.*,
 learn.skill_category as learn_skill_category, learn.skill_subcategory as learn_skill_subcategory, learn.skill_description as learn_skill_description,
 teach.skill_category as teach_skill_category, teach.skill_subcategory as teach_skill_subcategory, teach.skill_description as teach_skill_description,
-preferences.*
+preferences.My_Formality as Match_My_Formality,
+preferences.My_Schedule as Match_My_Schedule,
+preferences.My_Experience as Match_My_Experience,
+preferences.Their_Formality as Match_Their_Formality,
+preferences.Their_Schedule as Match_Their_Schedule,
+preferences.Their_Experience as Match_Their_Experience,
+preferences.Wt_Schedule as Match_Wt_Schedule,
+preferences.Wt_Formality as Match_Wt_Formality,
+preferences.Wt_Experience as Match_Wt_Experience,
+
+MyPref.My_Formality as ThisUser_My_Formality,
+MyPref.My_Schedule as ThisUser_My_Schedule,
+MyPref.My_Experience as ThisUser_My_Experience,
+MyPref.Their_Formality as ThisUser_Their_Formality,
+MyPref.Their_Schedule as ThisUser_Their_Schedule,
+MyPref.Their_Experience as ThisUser_Their_Experience,
+MyPref.Wt_Schedule as ThisUser_Wt_Schedule,
+MyPref.Wt_Formality as ThisUser_Wt_Formality,
+MyPref.Wt_Experience as ThisUser_Wt_Experience
+
 FROM
 (SELECT
     need_skills.*
@@ -79,14 +104,90 @@ INNER JOIN
   preferences
 ON
   teach.user_id = preferences.id
-       "
-)
 
-
-
+LEFT JOIN
+    preferences MyPref
+  WHERE
+    MyPref.user_id = " + "\"#{current_user.id}\""  )
     return @potential_matches
   end
 
 
+  def score_matches(potential_matches)
+
+    #Create arrays to represent This User's Preferences
+    a_answer = Vector[potential_matches.first["ThisUser_My_Formality"],
+                potential_matches.first["ThisUser_My_Schedule"],
+                potential_matches.first["ThisUser_My_Experience"]]
+
+    a_expectations = Vector[potential_matches.first["ThisUser_Their_Formality"],
+                potential_matches.first["ThisUser_Their_Schedule"],
+                potential_matches.first["ThisUser_Their_Experience"]]
+
+    a_weights = Vector[potential_matches.first["ThisUser_Wt_Formality"],
+                potential_matches.first["ThisUser_Wt_Schedule"],
+                potential_matches.first["ThisUser_Wt_Experience"]]
+
+    #Create empty array to store scores
+    outScores = Array.new
+
+    #Loop through matches and calculate score
+    for i in 0..potential_matches.count-1
+      #Create arrays to represent Matches Preferences
+      b_answer = Vector[potential_matches[i]["Match_My_Formality"],
+                  potential_matches[i]["Match_My_Schedule"],
+                  potential_matches[i]["Match_My_Experience"]]
+
+      b_expectations = Vector[potential_matches[i]["Match_Their_Formality"],
+                  potential_matches[i]["Match_Their_Schedule"],
+                  potential_matches[i]["Match_Their_Experience"]]
+
+      b_weights = Vector[potential_matches[i]["Match_Wt_Formality"],
+                  potential_matches[i]["Match_Wt_Schedule"],
+                  potential_matches[i]["Match_Wt_Experience"]]
+
+
+      #Calculate scores
+        #Person A scores
+        bool_vec = Matrix.row_vector(to_boolean_vec(a_expectations - b_answer))
+        weight_vec = Matrix.column_vector(a_weights)
+        n = (bool_vec*weight_vec).inject(:+).to_f
+        d = weight_vec.inject(:+).to_f
+        a_match = n / d
+
+        #Person B scores
+        bool_vec = Matrix.row_vector(to_boolean_vec(b_expectations - a_answer))
+        weight_vec = Matrix.column_vector(b_weights)
+        n = (bool_vec*weight_vec).inject(:+).to_f
+        d = weight_vec.inject(:+).to_f
+        b_match = n / d
+
+        outScore = (a_match*b_match)**(1.to_f/a_answer.count)
+
+        potential_matches[i]["score"] = outScore
+
+    end
+
+    return potential_matches
+  end
+
+  def to_boolean(var)
+    #force "0" evaluation to be "true", all else to be "false"
+    case var
+    when 0
+        return 1
+      else
+        return 0
+    end
+
+  end
+
+  def to_boolean_vec(vector)
+    outArr = Array.new
+    for i in 0..vector.size-1
+      outArr[i] = to_boolean (vector[i])
+    end
+    return outArr
+  end
 
 end

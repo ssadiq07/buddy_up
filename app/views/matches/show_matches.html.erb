@@ -7,16 +7,17 @@
       <td>Bio</td>
       <td> Learn </td>
       <td> Teach </td>
+      <td> Score </td>
 
     </tr>
-  <% @potential_matches.each do |match|%>
+  <% @scored_matches.each do |match|%>
 
   <tr>
     <td><%= match["first_name"] %></td>
     <td><%= match["bio"] %></td>
     <td><%= match["learn_skill_category"] %> > <%= match["learn_skill_subcategory"] %> > <%= match["learn_skill_description"]  %> </td>
     <td><%= match["teach_skill_category"] %> > <%= match["teach_skill_subcategory"] %> > <%= match["teach_skill_description"]  %> </td>
-
+    <td><%= number_to_percentage(match["score"] * 100, precision: 0)%>  </td>
   </tr>
   <% end %>
 

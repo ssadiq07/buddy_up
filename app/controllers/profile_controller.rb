@@ -7,7 +7,6 @@ class ProfileController < ActionController::Base
       @my_need_skills = current_user.need_skills
       @my_preferences = current_user.preference
 
-
       render("profiles/new_profile.html.erb")
   end
 
@@ -139,8 +138,8 @@ class ProfileController < ActionController::Base
   end
 
   def update_row_preference
-    @preference = Preference.find(params[current_user.id])
-    #@preference.user_id = current_user.id
+
+    @preference = current_user.preference
     @preference.My_Formality = params[:My_Formality]
     @preference.My_Schedule = params[:My_Schedule]
     @preference.My_Experience = params[:My_Experience]
