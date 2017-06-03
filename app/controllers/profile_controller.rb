@@ -1,5 +1,6 @@
 class ProfileController < ActionController::Base
   protect_from_forgery with: :exception
+  before_action :authenticate_user!
 
   def new_profile
       @my_profile = current_user
@@ -7,14 +8,15 @@ class ProfileController < ActionController::Base
       @my_need_skills = current_user.need_skills
       @my_preferences = current_user.preference
 
+
       render("profiles/new_profile.html.erb")
   end
 
   def show_profile
-      @my_profile = current_user
-      @my_have_skills = current_user.have_skills
-      @my_need_skills = current_user.need_skills
-      @my_preferences = current_user.preference
+      @my_profile = User.find(params[:id_to_show])
+      @my_have_skills = @my_profile.have_skills
+      @my_need_skills = @my_profile.need_skills
+      @my_preferences = @my_profile.preference
 
 
       render("profiles/show_profile.html.erb")
@@ -160,13 +162,12 @@ class ProfileController < ActionController::Base
   end
 
   def save_profile_preferences
-    if Preference.where(params[current_user.id]).present? then
+    if current_user.preference.present? then
       #save current settings
       update_row_preference
     else
       #create a new row
       create_row_preference
-
 
     end
   end

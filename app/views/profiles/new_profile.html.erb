@@ -1,32 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Bootstrap CSS -->
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-  <!-- Optional theme -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
   <!-- Latest compiled and minified JavaScript -->
   <style>
   textarea {
   width: 300px;
   height: 150px;
 }
-
-
-
   </style>
+  <script src="https://use.fontawesome.com/cecde7ae31.js"></script>
 </head>
 <body>
 
 
-<%= link_to "Sign Out", destroy_user_session_path %>
-<%= link_to "Show Matches", "/matches/show" %>
+  <nav class="navbar navbar-inverse bg-inverse navbar-fixed-top" >
+    <div class="navbar-header page-scroll">
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="/">Buddy Up</a>
+    </div>
+
+    <div class="collapse" id="navbarToggleExternalContent">
+          <!-- Sign in or out -->
+            <% if user_signed_in? %>
+              <a class="nav-item nav-link" href = "/users/sign_out"> Sign Out</a>
+            <% else %>
+              <a class="nav-item nav-link" href = "/users/sign_in"> Sign In</a>
+            <% end %>
+
+            <!-- Determine if User has valid profile -->
+            <!-- If profile valid, show links, if not valid redirect to complete profile -->
+            <% if user_signed_in? and current_user.valid? and current_user.preference.valid? and current_user.have_skills.count > 0 and  current_user.need_skills.count > 0   %>
+            <a class="nav-item nav-link" href = "/profile/new"> Edit Profile</a>
+            <a class="nav-item nav-link" href = "/profile/show/<%= current_user.id %>"> View Profile</a>
+            <a class="nav-item nav-link" href = "/matches/show"> Matches</a>
+            <% elsif  user_signed_in? %>
+              <a class="nav-item nav-link" href = "/profile/new"> Complete Profile</a>
+            <% end %>
+
+
+      </div>
+
+  </nav>
 
 
 <div class="container">
@@ -38,7 +60,7 @@
 
 <p><h3>Step 1: Tell us about yourself</h3>
 
-
+<!-- Profile Errors -->
 <% if @my_profile.errors.any? %>
   <div id="error_explanation">
 
@@ -49,6 +71,8 @@
     </ul>
   </div>
 <% end %>
+
+
 
 <!-- Basic Profile Information -->
 <form action="/profile/update">
@@ -88,15 +112,18 @@
 <hr>
 <p><h3>Step 2: What kind of skills do you have (can teach)</h3>
 <!-- Current Skills Errors  -->
-<% if @my_have_skills.errors.any? %>
+<!-- Call these errors when running def create_row_have_skill not new_profile  -->
+<% if @have_skill.present? then %>
+<% if @have_skill.errors.any? %>
   <div id="error_explanation">
 
     <ul>
-    <% @my_have_skills.errors.full_messages.each do |msg| %>
+    <% @have_skill.errors.full_messages.each do |msg| %>
       <b><font color="red"><%= msg %></font></b>
     <% end %>
     </ul>
   </div>
+<% end %>
 <% end %>
 
 <!--Teach Skills -->
@@ -114,7 +141,7 @@
 <% end %>
 
 <% else %>
-    You do not have any current teaching skills.  Please add one.
+  <b><font color="red">   You do not have any current teaching skills.  Please add one.</font></b>
 
 <% end %>
 
@@ -136,6 +163,21 @@
 
 <hr>
 <p><h3>Step 3: What kind of skills do you want (learn)</h3>
+  <!-- Call these errors when running def create_row_need_skill not new_profile  -->
+  <% if @need_skill.present? then %>
+  <% if @need_skill.errors.any? %>
+    <div id="error_explanation">
+
+      <ul>
+      <% @need_skill.errors.full_messages.each do |msg| %>
+        <b><font color="red"><%= msg %></font></b>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <% end %>
+
+
 <!--Teach Skills -->
 <form action="/create_need_skill" >
 
@@ -151,7 +193,7 @@
     </li>
   <% end %>
   <% else %>
-      You do not have any current learning skills.  Please add one.
+    <b><font color="red">  You do not have any current learning skills.  Please add one.</font></b>
 
   <% end %>
 
@@ -177,8 +219,28 @@
   <p> We ask three questions to match you with your buddy.  This allows us to optimize compatibility between you and your matched buddy.
 <br>
 <li><b><i>My Answer: </i></b>First answer the question for yourself.</li>
-<li><b><i>Their Answer: </i></b>Then let us know how you want your match to answer the question.</li>
-<li><b><i>Importance: </i></b> Then let us know how important this trait is to finding you an ideal buddy.</li>
+<li><b><i>Their Answer: </i></b>Then let us know how you want your buddy to answer the question.</li>
+<li><b><i>Importance: </i></b> Then let us know how important this trait is to you.</li>
+
+
+<!-- Preference errors -->
+<p>
+<% if @my_preferences == nil %>
+  <b><font color="red">Please update your preferences.</font></b>
+<% end %>
+
+<% if @preference.present? then %>
+<% if @preference.errors.any? %>
+  <div id="error_explanation">
+
+    <ul>
+    <% @preference.errors.full_messages.each do |msg| %>
+      <br><b><font color="red"><%= msg %></font></b>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
+<% end %>
 
 <p>
 <!--Preferences -->
@@ -190,42 +252,51 @@
 
 <tr>
   <td>My Answer:</td>
-  <td>Not that often</td>
   <td>
     <% if @my_preferences != nil %>
-    <input type="range" name="My_Schedule" id="My_Schedule" value="<%= @my_preferences.My_Schedule%>" min="1" max="10" data-show-value="true">
+      <%= select_tag(:My_Schedule, options_for_select(
+      [["Daily", 1], ["Weekly", 2], ["Bi-Weekly", 3], ["Monthly", 4]],
+      @my_preferences.My_Schedule), :include_blank => true,  :class => "form-control") %>
     <% else %>
-    <input type="range" name="My_Schedule" id="My_Schedule" value="5" min="1" max="10" data-show-value="true">
+      <%= select_tag(:My_Schedule, options_for_select(
+      [["Daily", 1], ["Weekly", 2], ["Bi-Weekly", 3], ["Monthly", 4]]),
+      :include_blank => true, :default => nil,:class => "form-control") %>
     <% end %>
   </td>
-      <td>All the time</td>
 </tr>
 
 
 <tr>
   <td>Their Answer:</td>
-  <td>Not that often</td>
   <td>
     <% if @my_preferences != nil %>
-    <input type="range" name="Their_Schedule" id="Their_Schedule" value="<%= @my_preferences.Their_Schedule%>" min="1" max="10" data-show-value="true">
+      <%= select_tag(:Their_Schedule, options_for_select(
+      [["Daily", 1], ["Weekly", 2], ["Bi-Weekly", 3], ["Monthly", 4]],
+      @my_preferences.Their_Schedule), :include_blank => true,  :class => "form-control") %>
     <% else %>
-    <input type="range" name="Their_Schedule" id="Their_Schedule" value="5" min="1" max="10" data-show-value="true">
+      <%= select_tag(:Their_Schedule, options_for_select(
+      [["Daily", 1], ["Weekly", 2], ["Bi-Weekly", 3], ["Monthly", 4]]),
+      :include_blank => true, :default => nil,:class => "form-control") %>
     <% end %>
+
   </td>
-  <td>All the time</td>
 </tr>
 
 <tr>
   <td>Importance:</td>
-  <td>Not very important</td>
   <td>
     <% if @my_preferences != nil %>
-    <input type="range" name="Their_Schedule" id="Their_Schedule" value="<%= @my_preferences.Their_Schedule%>" min="1" max="10" data-show-value="true">
+      <%= select_tag(:Wt_Schedule, options_for_select(
+      [["Not important", 1], ["Somewhat important", 10], ["Important", 50], ["Very important", 250]],
+      @my_preferences.Wt_Schedule), :include_blank => true,  :class => "form-control") %>
     <% else %>
-    <input type="range" name="Their_Schedule" id="Their_Schedule" value="5" min="1" max="10" data-show-value="true">
+      <%= select_tag(:Wt_Schedule, options_for_select(
+      [["Not important", 1], ["Somewhat important", 10], ["Important", 50], ["Very important", 250]]),
+      :include_blank => true, :default => nil,:class => "form-control") %>
     <% end %>
+
   </td>
-  <td>Very important</td>
+
 </tr>
 
 </table>
@@ -234,45 +305,50 @@
 <table>
 <tr>
   <td>My Answer:</td>
-  <td>Not structured or formal</td>
   <td>
     <% if @my_preferences != nil %>
-    <input type="range" name="My_Formality" id="My_Formality" value="<%= @my_preferences.My_Formality%>" min="1" max="10" data-show-value="true">
+      <%= select_tag(:My_Formality, options_for_select(
+      [["Informal", 1], ["Somewhat structured", 2], ["Structured", 3], ["Very structured", 4]],
+      @my_preferences.My_Formality), :include_blank => true,  :class => "form-control") %>
     <% else %>
-    <input type="range" name="My_Formality" id="My_Formality" value="5" min="1" max="10" data-show-value="true">
+      <%= select_tag(:My_Formality, options_for_select(
+      [["Informal", 1], ["Somewhat structured", 2], ["Structured", 3], ["Very structured", 4]]),
+      :include_blank => true, :default => nil,:class => "form-control") %>
     <% end %>
-
   </td>
-  <td>Very structured and formal</td>
 </tr>
 
 
 <tr>
   <td>Their Answer:</td>
-  <td>Not structured or formal</td>
   <td>
     <% if @my_preferences != nil %>
-    <input type="range" name="Their_Formality" id="Their_Formality" value="<%= @my_preferences.Their_Formality%>" min="1" max="10" data-show-value="true">
+      <%= select_tag(:Their_Formality, options_for_select(
+      [["Informal", 1], ["Somewhat structured", 2], ["Structured", 3], ["Very structured", 4]],
+      @my_preferences.Their_Formality), :include_blank => true,  :class => "form-control") %>
     <% else %>
-    <input type="range" name="Their_Formality" id="Their_Formality" value="5" min="1" max="10" data-show-value="true">
+      <%= select_tag(:Their_Formality, options_for_select(
+      [["Informal", 1], ["Somewhat structured", 2], ["Structured", 3], ["Very structured", 4]]),
+      :include_blank => true, :default => nil,:class => "form-control") %>
     <% end %>
 
   </td>
-  <td>Very structured and formal</td>
+
 </tr>
 
 <tr>
   <td>Importance:</td>
-  <td>Not very important</td>
   <td>
     <% if @my_preferences != nil %>
-    <input type="range" name="Wt_Formality" id="Wt_Formality" value="<%= @my_preferences.Wt_Formality%>" min="1" max="10" data-show-value="true">
+      <%= select_tag(:Wt_Formality, options_for_select(
+      [["Not important", 1], ["Somewhat important", 10], ["Important", 50], ["Very important", 250]],
+      @my_preferences.Wt_Formality), :include_blank => true,  :class => "form-control") %>
     <% else %>
-    <input type="range" name="Wt_Formality" id="Wt_Formality" value="5" min="1" max="10" data-show-value="true">
+      <%= select_tag(:Wt_Formality, options_for_select(
+      [["Not important", 1], ["Somewhat important", 10], ["Important", 50], ["Very important", 250]]),
+      :include_blank => true, :default => nil,:class => "form-control") %>
     <% end %>
-
-    </td>
-  <td>Very important</td>
+  </td>
 </tr>
 
 </table>
@@ -283,44 +359,54 @@
 <table>
 <tr>
   <td>My Answer:</td>
-  <td>Not experienced</td>
   <td>
     <% if @my_preferences != nil %>
-    <input type="range" name="My_Experience" id="My_Experience" value="<%= @my_preferences.My_Experience%>" min="1" max="10" data-show-value="true">
+      <%= select_tag(:My_Experience, options_for_select(
+      [["Beginner", 1], ["Intermediate", 2], ["Power user", 3]],
+      @my_preferences.My_Experience), :include_blank => true,  :class => "form-control") %>
     <% else %>
-    <input type="range" name="My_Experience" id="My_Experience" value="5" min="1" max="10" data-show-value="true">
+      <%= select_tag(:My_Experience, options_for_select(
+      [["Beginner", 1], ["Intermediate", 2], ["Power user", 3]]),
+      :include_blank => true, :default => nil,:class => "form-control") %>
     <% end %>
+  </td>
 
-    </td>
-  <td>Very experienced</td>
 </tr>
 
 
 <tr>
   <td>Their Answer:</td>
-  <td>Not experienced</td>
   <td>
     <% if @my_preferences != nil %>
-    <input type="range" name="Their_Experience" id="Their_Experience" value="<%= @my_preferences.Their_Experience%>" min="1" max="10" data-show-value="true">
+      <%= select_tag(:Their_Experience, options_for_select(
+      [["Beginner", 1], ["Intermediate", 2], ["Power user", 3]],
+      @my_preferences.Their_Experience), :include_blank => true,  :class => "form-control") %>
     <% else %>
-    <input type="range" name="Their_Experience" id="Their_Experience" value="5" min="1" max="10" data-show-value="true">
+      <%= select_tag(:Their_Experience, options_for_select(
+      [["Beginner", 1], ["Intermediate", 2], ["Power user", 3]]),
+      :include_blank => true, :default => nil,:class => "form-control") %>
     <% end %>
 
-    </td>
-  <td>Very experienced<</td>
+  </td>
+
 </tr>
 
 <tr>
   <td>Importance:</td>
-  <td>Not very important</td>
   <td>
     <% if @my_preferences != nil %>
-    <input type="range" name="Wt_Experience" id="Wt_Experience" value="<%= @my_preferences.Wt_Experience%>" min="1" max="10" data-show-value="true">
+      <%= select_tag(:Wt_Experience, options_for_select(
+      [["Not important", 1], ["Somewhat important", 10], ["Important", 50], ["Very important", 250]],
+      @my_preferences.Wt_Experience), :include_blank => true,  :class => "form-control") %>
     <% else %>
-    <input type="range" name="Wt_Experience" id="Wt_Experience" value="5" min="1" max="10" data-show-value="true">
+      <%= select_tag(:Wt_Experience, options_for_select(
+      [["Not important", 1], ["Somewhat important", 10], ["Important", 50], ["Very important", 250]]),
+      :include_blank => true, :default => nil,:class => "form-control") %>
     <% end %>
+
+
   </td>
-      <td>Very important</td>
+
 </tr>
 
 </table>

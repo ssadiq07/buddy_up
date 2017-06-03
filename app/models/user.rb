@@ -8,4 +8,8 @@ class User < ApplicationRecord
   has_many :need_skills
   has_one :preference
 
+#validates_associated :have_skills
+
+  validates :first_name, presence: { message: " cannot be blank." }
+  validates :last_name, presence: { message: " cannot be blank." }
 end

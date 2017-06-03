@@ -1,5 +1,7 @@
 class MatchController < ActionController::Base
   protect_from_forgery with: :exception
+  before_action :authenticate_user!
+
   def show_matches
     #Setup parameters
     @my_profile = current_user
@@ -10,11 +12,14 @@ class MatchController < ActionController::Base
     #Find potential matches
     @potential_matches = grab_potential_matches_v2
 
-    #Score potential matches
-    @scored_matches = score_matches(@potential_matches)
 
-    #Sort output by descending match rate
-    @scored_matches = @scored_matches.sort_by { |hsh| -1*hsh["score"] }
+    if @potential_matches.count > 0 then
+      #Score potential matches
+      @scored_matches = score_matches(@potential_matches)
+
+      #Sort output by descending match rate
+      @scored_matches = @scored_matches.sort_by { |hsh| -1*hsh["score"] }
+    end
 
 
     render("matches/show_matches.html.erb")
@@ -103,12 +108,13 @@ ON
 INNER JOIN
   preferences
 ON
-  teach.user_id = preferences.id
+  teach.user_id = preferences.user_id
 
 LEFT JOIN
     preferences MyPref
   WHERE
     MyPref.user_id = " + "\"#{current_user.id}\""  )
+
     return @potential_matches
   end
 

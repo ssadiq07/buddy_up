@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+
+
   def after_sign_up_path_for(resource)
     @my_profile = current_user
     @my_have_skills = current_user.have_skills
@@ -14,8 +16,16 @@ class ApplicationController < ActionController::Base
     @my_have_skills = current_user.have_skills
     @my_need_skills = current_user.need_skills
     @my_preferences = current_user.preference
-    session["user_return_to"] || "/profile/new"
+
+    if current_user.valid? and current_user.preference.valid? and current_user.have_skills.count > 0 and current_user.need_skills.count > 0 then
+      session["user_return_to"] || "/profile/show/1"
+    else
+      session["user_return_to"] || "/profile/new"
+    end
+
 
   end
+
+
 
 end
