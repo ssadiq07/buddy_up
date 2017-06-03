@@ -60,8 +60,13 @@
           <br><%= @my_profile.first_name %> <%= @my_profile.last_name %>
           <br>
           <a href="mailto:<%= @my_profile.email %>"><i class="fa fa-envelope fa-2x"></i></a>
-          <a href="<%= @my_profile.twitter %>"><i class="fa fa-twitter fa-2x"></i></a>
-          <a href="<%= @my_profile.linked_in %>"><i class="fa fa-linkedin fa-2x"></i></a>
+          <% if @my_profile.twitter != nil %>
+          <a href="<%= @my_profile.twitter  %>"><i class="fa fa-twitter fa-2x"></i></a>
+          <% end %>
+
+          <% if @my_profile.linked_in != nil %>
+          <a href="<%= @my_profile.linked_in  %>"><i class="fa fa-linkedin fa-2x"></i></a>
+          <% end %>
         </div>
         <div class="col-sm-8">
           <p> <b>About Me:</b>

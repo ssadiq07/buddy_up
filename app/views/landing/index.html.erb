@@ -57,10 +57,10 @@
           <div class="col-sm-7">
 
 
-<h2>Teach skills to learn skills</h2>
+<h2>Learn. Teach.</h2>
 
-<hr class="star-light">
-<p>  We use the same analytics as okcupid to find you a learning buddy that best matches your learning style.
+
+<p>The buddy system is when two people operate together as a single unit so that they are able to monitor and help each other.
 <p>Learn the smart way.
 
           </div>
@@ -112,7 +112,13 @@
             <div class="actions">
               <tr>
               <td></td>
-              <td style="text-align: right"><%= f.submit "Sign up" %></td>
+              <td style="text-align: right">
+                <% if user_signed_in?  %>
+                  You're already signed in.
+                <% else %>
+                  <%= f.submit "Sign up" %>
+                <% end %>
+              </td>
               </tr>
             </div>
             <% end %>
@@ -123,9 +129,23 @@
       </div>
   </div>
 
+<hr class="star-light">
 
+  <div class="container">
+    <center><H2>How it works</h2></center>
+      <div class="row">
+          <div class="col-sm-4"><i class="fa fa-question-circle fa-4x" aria-hidden="true"></i>
+            <br>We ask you questions so that we can understand the type of buddy you're looking for.
 
-
+          </div>
+          <div class="col-sm-4"><i class="fa fa-line-chart fa-4x" aria-hidden="true"></i>
+            <br>Then we use the same analytics as okcupid to optimize your matched buddies.
+          </div>
+          <div class="col-sm-4"><i class="fa fa-refresh fa-4x" aria-hidden="true"></i>
+            <br> So that you can get started on your skill trading journey.
+          </div>
+      </div>
+  </div>
 
 </body>
 </html>

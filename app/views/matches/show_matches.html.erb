@@ -70,16 +70,7 @@
       <i class="fa fa-user fa-4x" aria-hidden="true"></i>
       <br>
       <%= match["first_name"] %> <%= match["last_name"] %>
-      <br>
-      <a href="mailto:<%= match["email"] %>"><i class="fa fa-envelope fa-2x"></i></a>
 
-      <% if match["twitter"] != nil %>
-      <a href="<%= match["twitter"]  %>"><i class="fa fa-twitter fa-2x"></i></a>
-      <% end %>
-
-      <% if match["linked_in"] != nil %>
-      <a href="<%= match["linked_in"]  %>"><i class="fa fa-linkedin fa-2x"></i></a>
-      <% end %>
 
     </td>
     <td><%= number_to_percentage(match["score"] * 100, precision: 0)%>  </td>
@@ -90,7 +81,18 @@
     <td><%= match["teach_skill_category"] %> >
       <br><%= match["teach_skill_subcategory"] %> >
       <br><%= match["teach_skill_description"]  %> </td>
-    <td><a href="/profile/show/<%= match["id"] %>">View Profile</a></td>
+    <td><a href="/profile/show/<%= match["id"] %>">View Profile</a>
+      <br>
+      <a href="mailto:<%= match["email"] %>"><i class="fa fa-envelope fa-2x"></i></a>
+
+      <% if match["twitter"] != nil %>
+      <a href="<%= match["twitter"]  %>"><i class="fa fa-twitter fa-2x"></i></a>
+      <% end %>
+
+      <% if match["linked_in"] != nil %>
+      <a href="<%= match["linked_in"]  %>"><i class="fa fa-linkedin fa-2x"></i></a>
+      <% end %>
+    </td>
     </tr>
   <% end %>
 
