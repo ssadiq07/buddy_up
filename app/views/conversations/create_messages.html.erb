@@ -53,6 +53,7 @@
 
   <h2>Message <%= @create_convo_buddy.first_name %></h2>
 
+<% if @custom_error != nil %> <b><font color="red"><%= @custom_error %> </b></font> <% end %>
 
 <!-- Reply form -->
 <form action="/mailbox/message/<%= @create_convo_buddy.id %>">

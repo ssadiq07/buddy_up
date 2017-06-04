@@ -55,6 +55,20 @@
 
   <h2>Conversation with <%= @conversing_buddy.first_name %> </h2>
 
+  <!-- Message Errors -->
+  <% if @my_convo.errors.any? %>
+    <div id="error_explanation">
+
+      <ul>
+      <% @my_convo.errors.full_messages.each do |msg| %>
+        <b><font color="red"><%= msg %></font></b>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+
+
   <table>
 
   <% @my_messages.each do |message|%>

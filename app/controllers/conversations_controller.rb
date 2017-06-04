@@ -50,10 +50,15 @@ class ConversationsController < ActionController::Base
       @their_convo.message = params[:message]
       @their_convo.save
 
+      if @my_convo.save and @their_convo.save then
+        #Redirect to show messages
+        show_messages
+      else
+        @custom_error = "Message cannot be blank."
+        new_message_form
+      end
 
 
-      #Redirect to show messages
-      show_messages
  end
 
 
