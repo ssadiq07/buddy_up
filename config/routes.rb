@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   # Landing page
   root to: 'landing#index'
 
+
   # Profile
   get("/profile/new", { :controller => "profile", :action => "new_profile"})
   get("/profile/show/:id_to_show", { :controller => "profile", :action => "show_profile" })
@@ -26,5 +27,15 @@ Rails.application.routes.draw do
   # Matches
   get("/matches/show", { :controller => "match", :action => "show_matches"})
 
+  #------------------------------
+
+  # Mailbox
+  get("/mailbox", { :controller => "conversations", :action => "show_conversations"})
+  get("/mailbox/show/:buddy_id", { :controller => "conversations", :action => "show_messages"})
+  get("/mailbox/delete/:buddy_id", { :controller => "conversations", :action => "delete_messages"})
+
+  get("/mailbox/reply/:buddy_id", { :controller => "conversations", :action => "reply_message"})
+  get("/mailbox/message/:buddy_id", { :controller => "conversations", :action => "reply_message"})
+  get("/mailbox/new_message/:buddy_id", { :controller => "conversations", :action => "new_message_form"})
 
 end

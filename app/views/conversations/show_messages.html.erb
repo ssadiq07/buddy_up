@@ -51,62 +51,37 @@
 
   </nav>
 
-  <h3>Your Matches</h3>
 
-<% if @potential_matches.count > 0 then %>
-<p>
+
+  <h2>Conversation with <%= @conversing_buddy.first_name %> </h2>
+
   <table>
+
+  <% @my_messages.each do |message|%>
+  <!-- Show Name -->
     <tr>
-      <td></td>
-      <td>Compatibility </td>
-      <td>Learn</td>
-      <td>Teach </td>
-      <td></td>
-    </tr>
-  <% @scored_matches.each do |match|%>
-
-  <tr>
-    <td>
-      <p>
-      <i class="fa fa-user fa-4x" aria-hidden="true"></i>
-      <br>
-      <%= match["first_name"] %> <%= match["last_name"] %>
-
-
-    </td>
-    <td><%= number_to_percentage(match["score"] * 100, precision: 0)%>  </td>
-    <td><%= match["learn_skill_category"] %> >
-      <br><%= match["learn_skill_subcategory"] %> >
-      <br><%= match["learn_skill_description"]  %> </td>
-
-    <td><%= match["teach_skill_category"] %> >
-      <br><%= match["teach_skill_subcategory"] %> >
-      <br><%= match["teach_skill_description"]  %> </td>
-    <td><a href="/profile/show/<%= match["id"] %>">View Profile</a>
-      <br>
-      <a href="/mailbox/new_message/<%= match["id"] %>"><i class="fa fa-envelope fa-2x"></i></a>
-
-      <% if match["twitter"] != nil %>
-      <a href="<%= match["twitter"]  %>"><i class="fa fa-twitter fa-2x"></i></a>
-      <% end %>
-
-      <% if match["linked_in"] != nil %>
-      <a href="<%= match["linked_in"]  %>"><i class="fa fa-linkedin fa-2x"></i></a>
-      <% end %>
-    </td>
-    </tr>
+  <% if message["sender_id"] == current_user.id %>
+  <td>  Me:</td>
+  <% else %>
+  <td>  <%= @conversing_buddy.first_name %>:</td>
   <% end %>
 
-</table>
+    <!-- Show Message -->
+  <td>  <%= message.message %></td>
 
-<% else %>
-
-You currently have no potential matches.
   <% end %>
+  </tr>
+  </table>
 
 
+  <!-- Reply form -->
+  <form action="/mailbox/reply/<%= @my_messages.first["buddy_id"] %>">
 
 
+    <%=text_area_tag :message %>
 
+    <button>Reply</button>
+    </form>
 
 </body>
+</html>

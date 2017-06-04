@@ -41,6 +41,7 @@
             <a class="nav-item nav-link" href = "/profile/new"> Edit Profile</a>
             <a class="nav-item nav-link" href = "/profile/show/<%= current_user.id %>"> View Profile</a>
             <a class="nav-item nav-link" href = "/matches/show"> Matches</a>
+            <a class="nav-item nav-link" href = "/mailbox"> Conversations</a>
             <% elsif  user_signed_in? %>
               <a class="nav-item nav-link" href = "/profile/new"> Complete Profile</a>
             <% end %>
@@ -50,7 +51,6 @@
 
   </nav>
 
-
 <!-- Show profile -->
 <p>
 <div class="container">
@@ -59,7 +59,8 @@
           <i class="fa fa-user fa-4x" aria-hidden="true"></i>
           <br><%= @my_profile.first_name %> <%= @my_profile.last_name %>
           <br>
-          <a href="mailto:<%= @my_profile.email %>"><i class="fa fa-envelope fa-2x"></i></a>
+          <a href="/mailbox/new_message/<%= @my_profile.id %>"><i class="fa fa-envelope fa-2x"></i></a>
+
           <% if @my_profile.twitter != nil %>
           <a href="<%= @my_profile.twitter  %>"><i class="fa fa-twitter fa-2x"></i></a>
           <% end %>

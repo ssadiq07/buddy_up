@@ -41,6 +41,7 @@
             <a class="nav-item nav-link" href = "/profile/new"> Edit Profile</a>
             <a class="nav-item nav-link" href = "/profile/show/<%= current_user.id %>"> View Profile</a>
             <a class="nav-item nav-link" href = "/matches/show"> Matches</a>
+            <a class="nav-item nav-link" href = "/mailbox"> Conversations</a>
             <% elsif  user_signed_in? %>
               <a class="nav-item nav-link" href = "/profile/new"> Complete Profile</a>
             <% end %>

@@ -1,0 +1,5 @@
+sender_id,recipient_id,conversation_id,message
+1,50,1,Hi!
+50,1,1,Hi back!
+1,50,1,I'm Sabah!
+50,1,1,I'm Enid!

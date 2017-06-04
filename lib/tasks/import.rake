@@ -50,4 +50,14 @@ namespace :import do
     end
   end
 
+  desc "Import conversations from CSV"
+  task Conv: :environment do
+    Conversation.delete_all
+    csv_text = File.read('seed/conversations.csv')
+    csv = CSV.parse(csv_text, :headers => true)
+    csv.each do |row|
+      Conversation.create!(row.to_hash)
+    end
+  end
+
 end
