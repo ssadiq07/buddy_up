@@ -1,3 +1,5 @@
+require 'matrix'
+
 class MatchController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :authenticate_user!
@@ -10,7 +12,7 @@ class MatchController < ActionController::Base
     @my_preferences = current_user.preference
 
     #Find potential matches
-    @potential_matches = grab_potential_matches_v2
+    @potential_matches = grab_potential_matches
 
 
     if @potential_matches.count > 0 then
@@ -25,30 +27,8 @@ class MatchController < ActionController::Base
     render("matches/show_matches.html.erb")
   end
 
+
   def grab_potential_matches
-    #Create array of skills ids
-    my_needs = Array.new
-    for i in 0..current_user.need_skills.count-1
-        my_needs[i] = current_user.need_skills[i].skill_id
-    end
-    my_haves = Array.new
-    for i in 0..current_user.have_skills.count-1
-        my_haves[i] = current_user.have_skills[i].skill_id
-    end
-
-    #Find potential matches
-    @potential_matches_fitmyneeds = HaveSkill.where(skill_id: my_needs)
-    @potential_matches_ifitthem = NeedSkill.where(skill_id: my_haves)
-    ifitthem = Array.new
-    for i in 0..@potential_matches_ifitthem.count-1
-        ifitthem[i] = @potential_matches_ifitthem[i].user_id
-    end
-
-    @potential_matches = @potential_matches_fitmyneeds.where(user_id: ifitthem)
-    return @potential_matches
-  end
-
-  def grab_potential_matches_v2
     @potential_matches = ActiveRecord::Base.connection.execute("SELECT
 users.*,
 learn.skill_category as learn_skill_category, learn.skill_subcategory as learn_skill_subcategory, learn.skill_description as learn_skill_description,

@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
     @my_preferences = current_user.preference
 
     if current_user.valid? and current_user.preference.valid? and current_user.have_skills.count > 0 and current_user.need_skills.count > 0 then
-      session["user_return_to"] || "/profile/show/1"
+      session["user_return_to"] || "/profile/show/" + current_user.id.to_s
     else
       session["user_return_to"] || "/profile/new"
     end

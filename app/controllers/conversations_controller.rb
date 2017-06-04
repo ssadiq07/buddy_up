@@ -33,22 +33,24 @@ class ConversationsController < ActionController::Base
 
  def reply_message
       #Save a reply to existing convo (for current user id)
-      @this_convo = Conversation.new
-      @this_convo.user_id = current_user.id
-      @this_convo.buddy_id = params[:buddy_id]
-      @this_convo.sender_id = current_user.id
-      @this_convo.recipient_id = params[:buddy_id]
-      @this_convo.message = params[:message]
-      @this_convo.save
+      @my_convo = Conversation.new
+      @my_convo.user_id = current_user.id
+      @my_convo.buddy_id = params[:buddy_id]
+      @my_convo.sender_id = current_user.id
+      @my_convo.recipient_id = params[:buddy_id]
+      @my_convo.message = params[:message]
+      @my_convo.save
 
       #Save a reply to existing convo (for buddy id)
-      @this_convo = Conversation.new
-      @this_convo.user_id = params[:buddy_id]
-      @this_convo.buddy_id = current_user.id
-      @this_convo.sender_id = params[:buddy_id]
-      @this_convo.recipient_id = current_user.id
-      @this_convo.message = params[:message]
-      @this_convo.save
+      @their_convo = Conversation.new
+      @their_convo.user_id = params[:buddy_id]
+      @their_convo.buddy_id = current_user.id
+      @their_convo.sender_id = current_user.id
+      @their_convo.recipient_id = params[:buddy_id]
+      @their_convo.message = params[:message]
+      @their_convo.save
+
+
 
       #Redirect to show messages
       show_messages
