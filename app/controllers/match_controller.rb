@@ -1,6 +1,6 @@
 require 'matrix'
 
-class MatchController < ActionController::Base
+class MatchController < ApplicationController
   protect_from_forgery with: :exception
   before_action :authenticate_user!
 

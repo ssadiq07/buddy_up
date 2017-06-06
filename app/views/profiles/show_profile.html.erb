@@ -1,55 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-  <!-- Latest compiled and minified JavaScript -->
-  <style>
-  textarea {
-  width: 300px;
-  height: 150px;
-}
-  </style>
-  <script src="https://use.fontawesome.com/cecde7ae31.js"></script>
-</head>
-<body>
 
-
-  <nav class="navbar navbar-inverse bg-inverse navbar-fixed-top" >
-    <div class="navbar-header page-scroll">
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <a class="navbar-brand" href="/">Buddy Up</a>
-    </div>
-
-    <div class="collapse" id="navbarToggleExternalContent">
-          <!-- Sign in or out -->
-            <% if user_signed_in? %>
-              <a class="nav-item nav-link" href = "/users/sign_out"> Sign Out</a>
-            <% else %>
-              <a class="nav-item nav-link" href = "/users/sign_in"> Sign In</a>
-            <% end %>
-
-            <!-- Determine if User has valid profile -->
-            <!-- If profile valid, show links, if not valid redirect to complete profile -->
-            <% if user_signed_in? and current_user.valid? and current_user.preference.valid? and current_user.have_skills.count > 0 and  current_user.need_skills.count > 0   %>
-            <a class="nav-item nav-link" href = "/profile/new"> Edit Profile</a>
-            <a class="nav-item nav-link" href = "/profile/show/<%= current_user.id %>"> View Profile</a>
-            <a class="nav-item nav-link" href = "/matches/show"> Matches</a>
-            <a class="nav-item nav-link" href = "/mailbox"> Conversations</a>
-            <% elsif  user_signed_in? %>
-              <a class="nav-item nav-link" href = "/profile/new"> Complete Profile</a>
-            <% end %>
-
-
-      </div>
-
-  </nav>
 
 <!-- Show profile -->
 <p>
@@ -138,10 +87,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-
-</body>

@@ -1,4 +1,4 @@
-class LandingController < ActionController::Base
+class LandingController < ApplicationController
   protect_from_forgery with: :exception
 
 end
